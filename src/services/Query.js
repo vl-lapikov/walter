@@ -24,7 +24,7 @@ class Query {
                 query.tables.push( word );
                 isNext = false;
             }
-            if (['from', 'into', 'update', 'delete', 'join'].includes( word )) {
+            if (['from', 'into', 'update', 'join'].includes( word )) {
                 isNext = true;
             }
         } );

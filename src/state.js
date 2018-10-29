@@ -7,7 +7,7 @@ var state = {
             delete: true
         },
         webSocket: {
-            url: 'ws://192.168.33.21:8080/'
+            url: 'wss://192.168.33.21:8080/'
         },
     },
     content: {

@@ -10,7 +10,6 @@ class Right extends React.Component {
         return (
             <Grid item xs={8} style={{color : '#fff'}}>
                 {queries.map((query, i) => {
-                    console.log(openDialogQuery);
                     return <div key={i} onClick={() => openDialogQuery(query.filtered)}><Highlight className="sql">{query.filtered}</Highlight></div>;
                 })}
             </Grid>

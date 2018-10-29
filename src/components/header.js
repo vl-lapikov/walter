@@ -13,12 +13,12 @@ const styles = theme => ({
 class Header extends React.Component {
 
     render() {
-        const {classes} = this.props;
+        const {classes, restart, numberOfFilteredQueries} = this.props;
 
         return (
             <Grid item xs={12}>
                 <Grid container>
-                    <Grid item xs={10}>
+                    <Grid item xs={9}>
                         <Button
                             size="small"
                             color="primary"
@@ -54,6 +54,27 @@ class Header extends React.Component {
                             className={classes.button}
                             onClick={() => this.props.toggleFilter('set')}
                         >set</Button>
+                        <Button
+                            size="small"
+                            color="primary"
+                            variant={this.props.filters.show ? 'contained' : 'text'}
+                            className={classes.button}
+                            onClick={() => this.props.toggleFilter('show')}
+                        >show</Button>
+                        <Button
+                            size="small"
+                            color="primary"
+                            variant={this.props.filters.use ? 'contained' : 'text'}
+                            className={classes.button}
+                            onClick={() => this.props.toggleFilter('use')}
+                        >use</Button>
+                        <Button disabled color="secondary" style={{color: 'yellowgreen'}}>{numberOfFilteredQueries}</Button>
+
+                    </Grid>
+                    <Grid item xs={1}>
+                        <Button color="primary"
+                                onClick={() => restart()}
+                        >restart</Button>
                     </Grid>
                     <Grid item xs={2}>
                         <Input fullWidth value={this.props.webSocket.url}  style={{color : '#fff'}} />

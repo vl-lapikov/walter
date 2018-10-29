@@ -28,10 +28,12 @@ class App extends React.Component {
                     insert: true,
                     update: true,
                     delete: true,
+                    use:    false,
                     set:    false,
+                    show:   false,
                 },
                 webSocket: {
-                    url: 'ws://192.168.33.21:8080/'
+                    url: 'wss://general-log.com:8080/'
                 },
             },
             content: {
@@ -143,9 +145,21 @@ class App extends React.Component {
         this.setState(state);
     }
 
-    render() {
+    restart()
+    {
+        let state = Object.assign({}, this.state);
 
-        console.log();
+        state.content.filteredQueries = [];
+        this.query = null;
+        this.queries = [];
+
+        clearTimeout(this.timeouts.state);
+        this.timeouts.state = null;
+
+        this.setState(state);
+    }
+
+    render() {
 
         return <MuiThemeProvider theme={theme}>
             <Grid container>
@@ -153,6 +167,8 @@ class App extends React.Component {
                     filters={this.state.header.filters}
                     webSocket={this.state.header.webSocket}
                     toggleFilter={this.toggleFilter.bind(this)}
+                    restart={() => this.restart()}
+                    numberOfFilteredQueries={this.state.content.filteredQueries.length}
                 />
                 <Grid item xs={12}>
                     <Content queries={this.state.content.filteredQueries}
