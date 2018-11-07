@@ -66549,6 +66549,43 @@ module.exports = function(module) {
 
 /***/ }),
 
+/***/ "./src/components/HighlightExtended.js":
+/*!*********************************************!*\
+  !*** ./src/components/HighlightExtended.js ***!
+  \*********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_highlight__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-highlight */ "./node_modules/react-highlight/index.js");
+/* harmony import */ var react_highlight__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_highlight__WEBPACK_IMPORTED_MODULE_1__);
+
+
+
+class HighlightExtended extends react__WEBPACK_IMPORTED_MODULE_0___default.a.Component {
+
+    shouldComponentUpdate(nextProps, nextState) {
+        return this.props.query !== nextProps.query;
+    }
+
+    render() {
+        const { query } = this.props;
+
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(
+            react_highlight__WEBPACK_IMPORTED_MODULE_1___default.a,
+            { className: 'sql' },
+            query
+        );
+    }
+}
+
+/* harmony default export */ __webpack_exports__["default"] = (HighlightExtended);
+
+/***/ }),
+
 /***/ "./src/components/content.js":
 /*!***********************************!*\
   !*** ./src/components/content.js ***!
@@ -66570,6 +66607,10 @@ __webpack_require__.r(__webpack_exports__);
 
 
 class Content extends react__WEBPACK_IMPORTED_MODULE_0___default.a.Component {
+
+    shouldComponentUpdate(nextProps, nextState) {
+        return this.props.queries !== nextProps.queries;
+    }
 
     render() {
         const { queries, openDialogQuery } = this.props;
@@ -66684,7 +66725,7 @@ const styles = theme => ({
 class Header extends react__WEBPACK_IMPORTED_MODULE_0___default.a.Component {
 
     render() {
-        const { classes, restart, numberOfFilteredQueries } = this.props;
+        const { classes, restart, stop, numberOfFilteredQueries } = this.props;
 
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(
             _material_ui_core_Grid__WEBPACK_IMPORTED_MODULE_1___default.a,
@@ -66694,7 +66735,7 @@ class Header extends react__WEBPACK_IMPORTED_MODULE_0___default.a.Component {
                 { container: true },
                 react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(
                     _material_ui_core_Grid__WEBPACK_IMPORTED_MODULE_1___default.a,
-                    { item: true, xs: 9 },
+                    { item: true, xs: 7 },
                     react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(
                         _material_ui_core_Button__WEBPACK_IMPORTED_MODULE_2___default.a,
                         {
@@ -66780,13 +66821,21 @@ class Header extends react__WEBPACK_IMPORTED_MODULE_0___default.a.Component {
                 ),
                 react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(
                     _material_ui_core_Grid__WEBPACK_IMPORTED_MODULE_1___default.a,
-                    { item: true, xs: 1 },
+                    { item: true, xs: 3 },
+                    react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(
+                        _material_ui_core_Button__WEBPACK_IMPORTED_MODULE_2___default.a,
+                        { color: 'primary',
+                            variant: this.props.isStop ? 'contained' : 'text',
+                            onClick: () => stop()
+                        },
+                        'stop'
+                    ),
                     react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(
                         _material_ui_core_Button__WEBPACK_IMPORTED_MODULE_2___default.a,
                         { color: 'primary',
                             onClick: () => restart()
                         },
-                        'restart'
+                        'refresh'
                     )
                 ),
                 react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(
@@ -66816,11 +66865,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _material_ui_core_Grid__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @material-ui/core/Grid */ "./node_modules/@material-ui/core/Grid/index.js");
 /* harmony import */ var _material_ui_core_Grid__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_Grid__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var highlight_js_lib_highlight__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! highlight.js/lib/highlight */ "./node_modules/highlight.js/lib/highlight.js");
-/* harmony import */ var highlight_js_lib_highlight__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(highlight_js_lib_highlight__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var react_highlight__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-highlight */ "./node_modules/react-highlight/index.js");
-/* harmony import */ var react_highlight__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(react_highlight__WEBPACK_IMPORTED_MODULE_3__);
-
+/* harmony import */ var _HighlightExtended__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./HighlightExtended */ "./src/components/HighlightExtended.js");
 
 
 
@@ -66835,11 +66880,7 @@ class Left extends react__WEBPACK_IMPORTED_MODULE_0___default.a.Component {
             _material_ui_core_Grid__WEBPACK_IMPORTED_MODULE_1___default.a,
             { item: true, xs: 4, style: { color: '#fff' } },
             queries.map((query, i) => {
-                return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(
-                    react_highlight__WEBPACK_IMPORTED_MODULE_3___default.a,
-                    { key: i, className: 'sql' },
-                    query.tables.join(' ') || ' '
-                );
+                return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_HighlightExtended__WEBPACK_IMPORTED_MODULE_2__["default"], { key: 'left-' + i, className: 'sql', query: query.tables.join(' ') || ' ' });
             })
         );
     }
@@ -66862,8 +66903,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _material_ui_core_Grid__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @material-ui/core/Grid */ "./node_modules/@material-ui/core/Grid/index.js");
 /* harmony import */ var _material_ui_core_Grid__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_Grid__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var react_highlight__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-highlight */ "./node_modules/react-highlight/index.js");
-/* harmony import */ var react_highlight__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react_highlight__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _HighlightExtended__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./HighlightExtended */ "./src/components/HighlightExtended.js");
 
 
 
@@ -66879,12 +66919,8 @@ class Right extends react__WEBPACK_IMPORTED_MODULE_0___default.a.Component {
             queries.map((query, i) => {
                 return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(
                     'div',
-                    { key: i, onClick: () => openDialogQuery(query.filtered) },
-                    react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(
-                        react_highlight__WEBPACK_IMPORTED_MODULE_2___default.a,
-                        { className: 'sql' },
-                        query.filtered
-                    )
+                    { key: 'right-' + i, onClick: () => openDialogQuery(query.filtered) },
+                    react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_HighlightExtended__WEBPACK_IMPORTED_MODULE_2__["default"], { className: 'sql', query: query.filtered })
                 );
             })
         );
@@ -66954,7 +66990,8 @@ class App extends react__WEBPACK_IMPORTED_MODULE_0___default.a.Component {
                 },
                 webSocket: {
                     url: 'wss://general-log.com:8080/'
-                }
+                },
+                isStop: false
             },
             content: {
                 filteredQueries: [],
@@ -67060,6 +67097,24 @@ class App extends react__WEBPACK_IMPORTED_MODULE_0___default.a.Component {
         this.setState(state);
     }
 
+    stop() {
+        console.log(this.state.header.isStop);
+        if (this.state.header.isStop) {
+            let state = Object.assign({}, this.state);
+            state.header.isStop = false;
+            this.setState(state);
+
+            this.listen(this.state.header.webSocket.url);
+        } else {
+            this.ws.close();
+
+            let state = Object.assign({}, this.state);
+            state.header.isStop = true;
+
+            this.setState(state);
+        }
+    }
+
     restart() {
         let state = Object.assign({}, this.state);
 
@@ -67085,6 +67140,8 @@ class App extends react__WEBPACK_IMPORTED_MODULE_0___default.a.Component {
                     filters: this.state.header.filters,
                     webSocket: this.state.header.webSocket,
                     toggleFilter: this.toggleFilter.bind(this),
+                    isStop: this.state.header.isStop,
+                    stop: () => this.stop(),
                     restart: () => this.restart(),
                     numberOfFilteredQueries: this.state.content.filteredQueries.length
                 }),

@@ -13,12 +13,12 @@ const styles = theme => ({
 class Header extends React.Component {
 
     render() {
-        const {classes, restart, numberOfFilteredQueries} = this.props;
+        const {classes, restart, stop, numberOfFilteredQueries} = this.props;
 
         return (
             <Grid item xs={12}>
                 <Grid container>
-                    <Grid item xs={9}>
+                    <Grid item xs={7}>
                         <Button
                             size="small"
                             color="primary"
@@ -71,10 +71,14 @@ class Header extends React.Component {
                         <Button disabled color="secondary" style={{color: 'yellowgreen'}}>{numberOfFilteredQueries}</Button>
 
                     </Grid>
-                    <Grid item xs={1}>
+                    <Grid item xs={3}>
+                        <Button color="primary"
+                                variant={this.props.isStop ? 'contained' : 'text'}
+                                onClick={() => stop()}
+                        >stop</Button>
                         <Button color="primary"
                                 onClick={() => restart()}
-                        >restart</Button>
+                        >refresh</Button>
                     </Grid>
                     <Grid item xs={2}>
                         <Input fullWidth value={this.props.webSocket.url}  style={{color : '#fff'}} />

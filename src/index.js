@@ -35,6 +35,7 @@ class App extends React.Component {
                 webSocket: {
                     url: 'wss://general-log.com:8080/'
                 },
+                isStop: false,
             },
             content: {
                 filteredQueries: [],
@@ -145,6 +146,25 @@ class App extends React.Component {
         this.setState(state);
     }
 
+    stop()
+    {
+        console.log(this.state.header.isStop);
+        if (this.state.header.isStop) {
+            let state = Object.assign({}, this.state);
+            state.header.isStop = false;
+            this.setState(state);
+
+            this.listen(this.state.header.webSocket.url);
+        } else {
+            this.ws.close();
+
+            let state = Object.assign({}, this.state);
+            state.header.isStop = true;
+
+            this.setState(state);
+        }
+    }
+
     restart()
     {
         let state = Object.assign({}, this.state);
@@ -167,6 +187,8 @@ class App extends React.Component {
                     filters={this.state.header.filters}
                     webSocket={this.state.header.webSocket}
                     toggleFilter={this.toggleFilter.bind(this)}
+                    isStop={this.state.header.isStop}
+                    stop={() => this.stop()}
                     restart={() => this.restart()}
                     numberOfFilteredQueries={this.state.content.filteredQueries.length}
                 />

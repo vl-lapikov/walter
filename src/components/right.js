@@ -1,6 +1,6 @@
 import React from 'react';
 import Grid from '@material-ui/core/Grid';
-import Highlight from 'react-highlight'
+import HighlightExtended from './HighlightExtended';
 
 class Right extends React.Component {
 
@@ -10,7 +10,9 @@ class Right extends React.Component {
         return (
             <Grid item xs={8} style={{color : '#fff'}}>
                 {queries.map((query, i) => {
-                    return <div key={i} onClick={() => openDialogQuery(query.filtered)}><Highlight className="sql">{query.filtered}</Highlight></div>;
+                    return <div key={'right-'+i} onClick={() => openDialogQuery(query.filtered)}>
+                        <HighlightExtended className="sql" query={query.filtered}/>
+                    </div>;
                 })}
             </Grid>
         );

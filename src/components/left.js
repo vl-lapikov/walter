@@ -1,8 +1,7 @@
 import React from 'react';
 import Grid from '@material-ui/core/Grid';
-import hljs from 'highlight.js/lib/highlight';
 
-import Highlight from 'react-highlight'
+import HighlightExtended from './HighlightExtended';
 
 class Left extends React.Component {
 
@@ -12,7 +11,7 @@ class Left extends React.Component {
         return (
             <Grid item xs={4} style={{color : '#fff'}}>
                 {queries.map((query, i) => {
-                    return <Highlight key={i} className="sql">{query.tables.join(' ') || ' '}</Highlight>;
+                    return <HighlightExtended key={'left-'+i} className="sql" query={query.tables.join(' ') || ' '}/>;
                 })}
             </Grid>
         );

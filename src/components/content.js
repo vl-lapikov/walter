@@ -5,6 +5,10 @@ import Right from './right.js';
 
 class Content extends React.Component {
 
+    shouldComponentUpdate(nextProps, nextState) {
+        return this.props.queries !== nextProps.queries;
+    }
+
     render() {
         const {queries, openDialogQuery} = this.props;
 
