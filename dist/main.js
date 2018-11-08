@@ -66725,7 +66725,7 @@ const styles = theme => ({
 class Header extends react__WEBPACK_IMPORTED_MODULE_0___default.a.Component {
 
     render() {
-        const { classes, restart, stop, numberOfFilteredQueries } = this.props;
+        const { classes, restart, stop, numberOfFilteredQueries, numberOfQueries } = this.props;
 
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(
             _material_ui_core_Grid__WEBPACK_IMPORTED_MODULE_1___default.a,
@@ -66816,7 +66816,7 @@ class Header extends react__WEBPACK_IMPORTED_MODULE_0___default.a.Component {
                     react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(
                         _material_ui_core_Button__WEBPACK_IMPORTED_MODULE_2___default.a,
                         { disabled: true, color: 'secondary', style: { color: 'yellowgreen' } },
-                        numberOfFilteredQueries
+                        numberOfFilteredQueries + ' / ' + numberOfQueries
                     )
                 ),
                 react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(
@@ -67129,7 +67129,7 @@ class App extends react__WEBPACK_IMPORTED_MODULE_0___default.a.Component {
     }
 
     render() {
-
+        console.log(this.queries);
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(
             _material_ui_core_styles__WEBPACK_IMPORTED_MODULE_3__["MuiThemeProvider"],
             { theme: theme },
@@ -67143,7 +67143,8 @@ class App extends react__WEBPACK_IMPORTED_MODULE_0___default.a.Component {
                     isStop: this.state.header.isStop,
                     stop: () => this.stop(),
                     restart: () => this.restart(),
-                    numberOfFilteredQueries: this.state.content.filteredQueries.length
+                    numberOfFilteredQueries: this.state.content.filteredQueries.length,
+                    numberOfQueries: this.queries.length
                 }),
                 react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(
                     _material_ui_core_Grid__WEBPACK_IMPORTED_MODULE_2___default.a,

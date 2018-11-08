@@ -148,7 +148,6 @@ class App extends React.Component {
 
     stop()
     {
-        console.log(this.state.header.isStop);
         if (this.state.header.isStop) {
             let state = Object.assign({}, this.state);
             state.header.isStop = false;
@@ -180,7 +179,6 @@ class App extends React.Component {
     }
 
     render() {
-
         return <MuiThemeProvider theme={theme}>
             <Grid container>
                 <Header
@@ -191,6 +189,7 @@ class App extends React.Component {
                     stop={() => this.stop()}
                     restart={() => this.restart()}
                     numberOfFilteredQueries={this.state.content.filteredQueries.length}
+                    numberOfQueries={this.queries.length}
                 />
                 <Grid item xs={12}>
                     <Content queries={this.state.content.filteredQueries}

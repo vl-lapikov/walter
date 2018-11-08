@@ -13,7 +13,7 @@ const styles = theme => ({
 class Header extends React.Component {
 
     render() {
-        const {classes, restart, stop, numberOfFilteredQueries} = this.props;
+        const {classes, restart, stop, numberOfFilteredQueries, numberOfQueries} = this.props;
 
         return (
             <Grid item xs={12}>
@@ -68,8 +68,7 @@ class Header extends React.Component {
                             className={classes.button}
                             onClick={() => this.props.toggleFilter('use')}
                         >use</Button>
-                        <Button disabled color="secondary" style={{color: 'yellowgreen'}}>{numberOfFilteredQueries}</Button>
-
+                        <Button disabled color="secondary" style={{color: 'yellowgreen'}}>{numberOfFilteredQueries+' / '+numberOfQueries}</Button>
                     </Grid>
                     <Grid item xs={3}>
                         <Button color="primary"
