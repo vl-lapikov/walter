@@ -3,6 +3,7 @@ import { render } from 'react-dom'
 import Grid from '@material-ui/core/Grid';
 import { createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles';
 import blue from '@material-ui/core/colors/blue';
+import blueGrey from '@material-ui/core/colors/blueGrey';
 import Header from './components/header.js';
 import Content from "./components/content";
 import Query from './services/Query';
@@ -11,6 +12,7 @@ import QueryDialog from './components/dialogs/QueryDialog';
 const theme = createMuiTheme({
     palette: {
         primary: blue,
+        secondary: blueGrey,
     },
     typography: {
         useNextVariants: true,

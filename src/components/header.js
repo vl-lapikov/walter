@@ -3,6 +3,8 @@ import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
 import Input from '@material-ui/core/Input';
 import { withStyles } from '@material-ui/core/styles';
+import Tooltip from '@material-ui/core/Tooltip';
+import Help from '@material-ui/icons/Help';
 
 const styles = theme => ({
     button: {
@@ -18,7 +20,7 @@ class Header extends React.Component {
         return (
             <Grid item xs={12}>
                 <Grid container>
-                    <Grid item xs={7}>
+                    <Grid item xs={6}>
                         <Button
                             size="small"
                             color="primary"
@@ -69,6 +71,9 @@ class Header extends React.Component {
                             onClick={() => this.props.toggleFilter('use')}
                         >use</Button>
                         <Button disabled color="secondary" style={{color: 'yellowgreen'}}>{numberOfFilteredQueries+' / '+numberOfQueries}</Button>
+                        <Tooltip title="Walter doesn't support queries like Connect, Quit, Prepare. But shows the total number for transparency.">
+                            <Help color="secondary" fontSize="small" />
+                        </Tooltip>
                     </Grid>
                     <Grid item xs={3}>
                         <Button color="primary"
@@ -79,8 +84,8 @@ class Header extends React.Component {
                                 onClick={() => restart()}
                         >refresh</Button>
                     </Grid>
-                    <Grid item xs={2}>
-                        <Input fullWidth value={this.props.webSocket.url}  style={{color : '#fff'}} />
+                    <Grid item xs={3}>
+                        <Input fullWidth value={this.props.webSocket.url} style={{color : '#fff'}} />
                     </Grid>
                 </Grid>
             </Grid>
