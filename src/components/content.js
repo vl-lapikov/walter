@@ -14,7 +14,7 @@ class Content extends React.Component {
 
         return (
             <Grid container spacing={0}>
-                <Left queries={queries} />
+                <Left queries={queries} openDialogQuery={openDialogQuery} />
                 <Right queries={queries} openDialogQuery={openDialogQuery} />
             </Grid>
         );

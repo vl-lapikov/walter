@@ -6,12 +6,14 @@ import HighlightExtended from './HighlightExtended';
 class Left extends React.Component {
 
     render() {
-        const {queries} = this.props;
+        const {queries, openDialogQuery} = this.props;
 
         return (
             <Grid item xs={4} style={{color : '#fff'}}>
                 {queries.map((query, i) => {
-                    return <HighlightExtended key={'left-'+i} className="sql" query={query.tables.join(' ') || ' '}/>;
+                    return <div key={'left-'+i}  onClick={() => openDialogQuery(query.filtered)}>
+                        <HighlightExtended className="sql" query={query.tables.join(' ') || ' '}/>
+                    </div>;
                 })}
             </Grid>
         );
