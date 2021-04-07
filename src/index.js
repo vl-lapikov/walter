@@ -35,7 +35,7 @@ class App extends React.Component {
                     show:   false,
                 },
                 webSocket: {
-                    url: 'wss://general-log.com:8080/'
+                    url: 'wss://general-log.com:8081/'
                 },
                 isStop: false,
             },
@@ -74,7 +74,7 @@ class App extends React.Component {
         let data = event.data;
         data = data.toLowerCase().trim();
         data = data.replace( /\t/g, ' ' );
-        data = data.replace( /^\d{6} \d{2}:\d{2}:\d{2} /, '' );
+        data = data.replace( /^\d{4}-\d{2}-\d{2}t\d{2}:\d{2}:\d{2}\.\d{6}z/, '' );
         data = data.replace( /^ */, '' );
 
         let words = data.split( ' ' );
